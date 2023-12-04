@@ -3,11 +3,13 @@ import { Link, NavLink, Navigate } from 'react-router-dom';
 import { getAuth, signOut } from 'firebase/auth';
 import app from '../firebase/firebase.init';
 import { Context } from '../context/AppContext';
+import Loader from './Loader';
 
 const Header = () => {
-  const { user, userPhoto, setUser } = useContext(Context);
+  const { user, userPhoto, setUser, loggedUser, loading } = useContext(Context);
   const auth = getAuth(app);
   const dark = true;
+  console.log(loggedUser);
   function handleLogout() {
     signOut(auth)
       .then(() => {
@@ -20,7 +22,9 @@ const Header = () => {
       });
   }
 
-  console.log(dark);
+  if (loading) {
+    return <Loader />;
+  }
 
   const navItems = (
     <>
@@ -86,10 +90,12 @@ const Header = () => {
             </label>
             <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
               <li>
-                <Link to={'/profile'} className="justify-between">
+                {/* <Link to={'/profile'} className="justify-between">
                   {user}
-                </Link>
-                <Link to={'/add-item'}>Add a Food item</Link>
+                </Link> */}
+                <Link to={`/added-item/${loggedUser?._id}`}>My Added Food Items</Link>
+                <Link to={'/add-item'}>Add A Food Item</Link>
+                <Link to={`/cart/${loggedUser?._id}`}>My Ordered Food Items</Link>
               </li>
               <li>
                 <button onClick={handleLogout}>Logout</button>

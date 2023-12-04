@@ -14,7 +14,7 @@ const LoginForm = () => {
   const [success, setSuccess] = useState('');
   const auth = getAuth(app);
   const provider = new GoogleAuthProvider();
-  const { setUser, setUserPhoto, setLoggedUser } = useContext(Context);
+  const { setUser, setUserPhoto, setLoggedUser, setReload } = useContext(Context);
 
   function handleGoogleSignIn() {
     signInWithPopup(auth, provider)
@@ -31,10 +31,12 @@ const LoginForm = () => {
         console.log(res.data);
         if (res.data._id) {
           localStorage.setItem('loggedUser', JSON.stringify(res.data));
+          setReload(prev => prev + 1);
         } else {
           const res = await Axios.post('https://restaurant-management-server.onrender.com/register', { name: user.displayName, email: user.email, profilePicture: user.photoURL });
           console.log(res.data);
           localStorage.setItem('loggedUser', JSON.stringify({ id: res.data_id, name: user.displayName, email: user.email, profilePicture: user.photoURL }));
+          setReload(prev => prev + 1);
         }
       })
       .catch(error => {
@@ -61,6 +63,7 @@ const LoginForm = () => {
         setSuccess('Login successful!');
         const res = await Axios.post('https://restaurant-management-server.onrender.com/login', { email });
         localStorage.setItem('loggedUser', JSON.stringify(res.data));
+        setReload(prev => prev + 1);
         console.log(res.data._id);
         if (!res.data) {
           function handleLogout() {
