@@ -88,6 +88,7 @@ const Header = () => {
                 <Link to={'/profile'} className="justify-between">
                   {user}
                 </Link>
+                <Link to={'/add-item'}>Add a Food item</Link>
               </li>
               <li>
                 <button onClick={handleLogout}>Logout</button>

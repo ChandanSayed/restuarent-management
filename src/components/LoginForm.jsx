@@ -29,7 +29,7 @@ const LoginForm = () => {
         console.log(user);
         const res = await Axios.post('https://restaurant-management-server.onrender.com/login', { email: user.email });
         console.log(res.data);
-        if (res.data) {
+        if (res.data._id) {
           localStorage.setItem('loggedUser', JSON.stringify(res.data));
         } else {
           const res = await Axios.post('https://restaurant-management-server.onrender.com/register', { name: user.displayName, email: user.email, profilePicture: user.photoURL });
@@ -61,7 +61,7 @@ const LoginForm = () => {
         setSuccess('Login successful!');
         const res = await Axios.post('https://restaurant-management-server.onrender.com/login', { email });
         localStorage.setItem('loggedUser', JSON.stringify(res.data));
-        console.log(res.data);
+        console.log(res.data._id);
         if (!res.data) {
           function handleLogout() {
             signOut(auth)

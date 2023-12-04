@@ -39,7 +39,7 @@ const router = createBrowserRouter([
         )
       },
       {
-        path: '/add-product',
+        path: '/add-item',
         element: (
           <PrivateRoute>
             <AddItem />
