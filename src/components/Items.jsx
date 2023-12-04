@@ -20,8 +20,8 @@ const Items = () => {
     <div className="bg-base-200">
       {items.length > 0 ? (
         <div className="max-w-[1440px] px-4 mx-auto py-12 flex flex-wrap gap-6 justify-center">
-          {items.map(product => (
-            <ItemCard key={product._id} product={product} />
+          {items.map(item => (
+            <ItemCard key={item._id} item={item} />
           ))}
         </div>
       ) : (
