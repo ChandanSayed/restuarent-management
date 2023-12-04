@@ -18,12 +18,12 @@ const MyCart = () => {
   }, [refreshList]);
 
   async function myOrderedItems() {
-    const res = await axios.get(`http://localhost:5500/ordered-foods/${id}`);
+    const res = await axios.get(`https://restaurant-management-server.onrender.com/ordered-foods/${id}`);
     setOrderedItems(res.data);
   }
 
   async function handleDelete(id) {
-    const res = await axios.delete(`http://localhost:5500/ordered-foods/${id}`);
+    const res = await axios.delete(`https://restaurant-management-server.onrender.com/ordered-foods/${id}`);
     console.log(res.data);
     console.log(id);
     if (res.data.deletedCount) {
@@ -47,6 +47,7 @@ const MyCart = () => {
               <th>Name</th>
               <th>Made By</th>
               <th>Price</th>
+              <th>Order Time</th>
               <th></th>
             </tr>
           </thead>
@@ -71,6 +72,7 @@ const MyCart = () => {
                     </td>
                     <td>{item.addedByName}</td>
                     <td>$ {item.price}</td>
+                    <td> {item.buyingTime}</td>
                     <th>
                       <button onClick={() => handleDelete(item._id)} className="btn btn-ghost btn-xs">
                         Delete
@@ -81,7 +83,7 @@ const MyCart = () => {
               })
             ) : (
               <tr>
-                <td colSpan={'4'}>
+                <td colSpan={'5'}>
                   <p className="text-center">You have no orders to show</p>
                 </td>
               </tr>

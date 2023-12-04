@@ -7,6 +7,7 @@ import { Navigate } from 'react-router-dom';
 const OrderFood = () => {
   const { loggedUser, itemDetails } = useContext(Context);
   console.log(loggedUser);
+
   const [errors, setErrors] = useState({});
   const [formData, setFormData] = useState({ ...itemDetails, buyerName: loggedUser.name, buyerEmail: loggedUser.email, buyingQuantity: '' });
 
@@ -48,12 +49,20 @@ const OrderFood = () => {
       }
       const count = parseInt(formData.orderCount) + parseInt(formData.buyingQuantity);
       formData.orderCount = count;
-      const res = await axios.post('https://restaurant-management-server.onrender.com/order-food', formData);
+      const now = new Date();
+
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const seconds = String(now.getSeconds()).padStart(2, '0');
+
+      const buyingTime = `${hours}:${minutes}:${seconds}`;
+
+      const res = await axios.post('https://restaurant-management-server.onrender.com/order-food', { ...formData, buyingTime });
       console.log(res.data);
       if (res.data.acknowledged) {
         Swal.fire({
           title: 'Congrats!',
-          text: 'You ordered the Item!',
+          text: 'Order Successful!',
           icon: 'success'
         });
         return <Navigate to={`/items/item-details/${formData._id}`}></Navigate>;
