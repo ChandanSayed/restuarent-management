@@ -27,14 +27,14 @@ const LoginForm = () => {
         // IdP data available using getAdditionalUserInfo(result)
         // ...
         console.log(user);
-        const res = await Axios.post('http://localhost:5500/login', { email: user.email });
+        const res = await Axios.post('https://restaurant-management-server.onrender.com/login', { email: user.email });
         console.log(res.data);
         if (res.data) {
           localStorage.setItem('loggedUser', JSON.stringify(res.data));
         } else {
-          const res = await Axios.post('http://localhost:5500/register', { name: user.displayName, email: user.email, profilePicture: user.photoURL });
+          const res = await Axios.post('https://restaurant-management-server.onrender.com/register', { name: user.displayName, email: user.email, profilePicture: user.photoURL });
           console.log(res.data);
-          localStorage.setItem('loggedUser', JSON.stringify({ name: user.displayName, email: user.email, profilePicture: user.photoURL }));
+          localStorage.setItem('loggedUser', JSON.stringify({ id: res.data_id, name: user.displayName, email: user.email, profilePicture: user.photoURL }));
         }
       })
       .catch(error => {
@@ -59,7 +59,7 @@ const LoginForm = () => {
         const user = userCredential.user;
         console.log(user);
         setSuccess('Login successful!');
-        const res = await Axios.post('http://localhost:5500/login', { email });
+        const res = await Axios.post('https://restaurant-management-server.onrender.com/login', { email });
         localStorage.setItem('loggedUser', JSON.stringify(res.data));
         console.log(res.data);
         if (!res.data) {

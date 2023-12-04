@@ -80,7 +80,7 @@ const Header = () => {
           <div className={`dropdown dropdown-end ml-2 ${user ? '' : 'hidden'}`}>
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
               <div className="w-10 rounded-full">
-                <img alt="Profile Picture" src={userPhoto} />
+                <img alt="Profile Picture" className="bg-white" src={userPhoto} />
               </div>
             </label>
             <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">

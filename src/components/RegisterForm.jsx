@@ -35,8 +35,11 @@ const RegisterForm = () => {
         })
           .then(async () => {
             console.log('Profile updated!');
-            const res = await Axios.post('http://localhost:5500/register', { name, email, profilePicture });
+            const res = await Axios.post('https://restaurant-management-server.onrender.com/register', { name, email, profilePicture });
             console.log(res.data);
+            if (res.data.acknowledge) {
+              localStorage.setItem('loggedUser', JSON.stringify(res.data));
+            }
           })
           .catch(error => {
             // An error occurred
