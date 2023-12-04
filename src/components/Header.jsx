@@ -95,7 +95,7 @@ const Header = () => {
                 </Link> */}
                 <Link to={`/added-items/${loggedUser?._id}`}>My Added Food Items</Link>
                 <Link to={'/add-item'}>Add A Food Item</Link>
-                <Link to={`/cart/${loggedUser?._id}`}>My Ordered Food Items</Link>
+                <Link to={`/cart/${loggedUser?.email}`}>My Ordered Food Items</Link>
               </li>
               <li>
                 <button onClick={handleLogout}>Logout</button>

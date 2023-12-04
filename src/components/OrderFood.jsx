@@ -48,7 +48,7 @@ const OrderFood = () => {
       }
       const count = parseInt(formData.orderCount) + parseInt(formData.buyingQuantity);
       formData.orderCount = count;
-      const res = await axios.post('http://localhost:5500/order-food', formData);
+      const res = await axios.post('https://restaurant-management-server.onrender.com/order-food', formData);
       console.log(res.data);
       if (res.data.acknowledged) {
         Swal.fire({
