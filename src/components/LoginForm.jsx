@@ -35,8 +35,10 @@ const LoginForm = () => {
         } else {
           const res = await Axios.post('https://restaurant-management-server.onrender.com/register', { name: user.displayName, email: user.email, profilePicture: user.photoURL });
           console.log(res.data);
-          localStorage.setItem('loggedUser', JSON.stringify({ id: res.data_id, name: user.displayName, email: user.email, profilePicture: user.photoURL }));
-          setReload(prev => prev + 1);
+          if (res.data.insertedId) {
+            localStorage.setItem('loggedUser', JSON.stringify({ id: res.data.insertedId, name: user.displayName, email: user.email, profilePicture: user.photoURL }));
+            setReload(prev => prev + 1);
+          }
         }
       })
       .catch(error => {
