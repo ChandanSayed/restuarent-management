@@ -12,9 +12,10 @@ import AppContext from './context/AppContext.jsx';
 import AddItem from './components/AddItem.jsx';
 import ItemDetails from './components/ItemDetails.jsx';
 import ItemUpdate from './components/ItemUpdate.jsx';
-import { Items } from './components/Items.jsx';
+import Items from './components/Items.jsx';
 import Profile from './components/Profile.jsx';
 import Blog from './components/Blog.jsx';
+import MyProductList from './components/MyProductList.jsx';
 
 const router = createBrowserRouter([
   {
@@ -43,6 +44,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <AddItem />
+          </PrivateRoute>
+        )
+      },
+      {
+        path: '/added-items/:id',
+        element: (
+          <PrivateRoute>
+            <MyProductList />
           </PrivateRoute>
         )
       },

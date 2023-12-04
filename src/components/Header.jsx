@@ -40,9 +40,9 @@ const Header = () => {
         </NavLink>
       </li>
       <li>
-        <Link to={'/profile'} className={`${user ? '' : 'hidden'}`}>
+        <NavLink to={'/profile'} className={`${user ? '' : 'hidden'}`}>
           Profile
-        </Link>
+        </NavLink>
       </li>
       <li>
         <NavLink to={'/login'} className={`${!user ? '' : 'hidden'}`}>
@@ -93,7 +93,7 @@ const Header = () => {
                 {/* <Link to={'/profile'} className="justify-between">
                   {user}
                 </Link> */}
-                <Link to={`/added-item/${loggedUser?._id}`}>My Added Food Items</Link>
+                <Link to={`/added-items/${loggedUser?._id}`}>My Added Food Items</Link>
                 <Link to={'/add-item'}>Add A Food Item</Link>
                 <Link to={`/cart/${loggedUser?._id}`}>My Ordered Food Items</Link>
               </li>

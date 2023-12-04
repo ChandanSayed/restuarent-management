@@ -3,7 +3,7 @@ import ItemCard from './ItemCard';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
-const Items = () => {
+const MyProductList = () => {
   const { id } = useParams();
   const [items, setItems] = useState([]);
   useEffect(() => {
@@ -11,7 +11,7 @@ const Items = () => {
   }, []);
 
   async function getItems() {
-    const res = await axios.get(`http://localhost:5500/items/`);
+    const res = await axios.get(`https://restaurant-management-server.onrender.com/items/${id}`);
     console.log(res.data);
     setItems(res.data);
   }
@@ -27,8 +27,8 @@ const Items = () => {
       ) : (
         <div className="min-h-screen flex items-center justify-center">
           <div className="text-center px-4">
-            <h2 className="text-2xl lg:text-4xl font-bold mb-6">No items available right now!</h2>
-            <p>We are trying out best to add items. Thank you for visiting!</p>
+            <h2 className="text-2xl lg:text-4xl font-bold mb-6">No items available in this category right now!</h2>
+            <p>We are trying out best to add items to this category. Thank you for visiting!</p>
           </div>
         </div>
       )}
@@ -36,4 +36,4 @@ const Items = () => {
   );
 };
 
-export default Items;
+export default MyProductList;
