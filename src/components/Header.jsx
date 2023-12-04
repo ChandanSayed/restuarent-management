@@ -12,6 +12,7 @@ const Header = () => {
     signOut(auth)
       .then(() => {
         setUser('');
+        localStorage.removeItem('loggedUser');
         return <Navigate to={'/'} />;
       })
       .catch(error => {

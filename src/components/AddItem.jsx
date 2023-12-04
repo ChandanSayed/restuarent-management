@@ -17,7 +17,8 @@ const AddItem = () => {
     origin: '',
     addedByEmail: loggedUser.email,
     addedByName: loggedUser.name,
-    orderCount: 0
+    orderCount: 0,
+    addedById: loggedUser._id
   });
 
   const addProductHandler = async () => {
@@ -39,7 +40,8 @@ const AddItem = () => {
         origin: '',
         addedBy: loggedUser.email,
         addedByName: loggedUser.name,
-        orderCount: 0
+        orderCount: 0,
+        addedById: loggedUser._id
       });
     }
   };
