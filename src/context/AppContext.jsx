@@ -9,7 +9,7 @@ export default function AppContext({ children }) {
   const [uId, setUId] = useState('');
   const [userPhoto, setUserPhoto] = useState('');
   const [loading, setLoading] = useState(true);
-  const [dark, setDark] = useState(false);
+  const [loggedUser, setLoggedUser] = useState({});
 
   const auth = getAuth(app);
   useEffect(() => {
@@ -19,6 +19,7 @@ export default function AppContext({ children }) {
         setUId(uid);
         setUser(user.displayName);
         setUserPhoto(user.photoURL);
+        setLoggedUser(JSON.parse(localStorage.getItem('loggedUser')));
         setLoading(false);
       } else {
         console.log('User is signed out');
@@ -26,7 +27,7 @@ export default function AppContext({ children }) {
       }
     });
   }, []);
-  return <Context.Provider value={{ dark, setDark, user, userPhoto, setUser, setUserPhoto, loading, setLoading, uId }}>{children}</Context.Provider>;
+  return <Context.Provider value={{ loggedUser, user, userPhoto, setUser, setUserPhoto, loading, setLoading, uId }}>{children}</Context.Provider>;
 }
 
 // export default AppContext;

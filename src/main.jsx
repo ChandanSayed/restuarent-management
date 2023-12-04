@@ -13,6 +13,8 @@ import AddItem from './components/AddItem.jsx';
 import ItemDetails from './components/ItemDetails.jsx';
 import ItemUpdate from './components/ItemUpdate.jsx';
 import { Items } from './components/Items.jsx';
+import Profile from './components/Profile.jsx';
+import Blog from './components/Blog.jsx';
 
 const router = createBrowserRouter([
   {
@@ -66,6 +68,22 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <ItemUpdate />
+          </PrivateRoute>
+        )
+      },
+      {
+        path: '/profile',
+        element: (
+          <PrivateRoute>
+            <Profile />
+          </PrivateRoute>
+        )
+      },
+      {
+        path: '/blog',
+        element: (
+          <PrivateRoute>
+            <Blog />
           </PrivateRoute>
         )
       }

@@ -27,14 +27,18 @@ const Header = () => {
         <NavLink to={'/'}>Home</NavLink>
       </li>
       <li>
-        <NavLink to={'/add-product'}>Add Product</NavLink>
+        <NavLink to={'/items'}>All Food Items</NavLink>
       </li>
       <li>
-        <NavLink className={`${user ? '' : 'hidden'}`} to={'/cart'}>
-          My Cart
+        <NavLink className={`${user ? '' : 'hidden'}`} to={'/blog'}>
+          Blog
         </NavLink>
       </li>
-
+      <li>
+        <Link to={'/profile'} className={`${user ? '' : 'hidden'}`}>
+          Profile
+        </Link>
+      </li>
       <li>
         <NavLink to={'/login'} className={`${!user ? '' : 'hidden'}`}>
           Login
