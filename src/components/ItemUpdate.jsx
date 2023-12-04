@@ -26,7 +26,7 @@ const ItemUpdate = () => {
 
   const updateItemHandler = async () => {
     formData.orderCount += 1;
-    const res = await axios.put('https://restaurant-management-server.onrender.com/add-item', formData);
+    const res = await axios.put('https://restaurant-management-server.onrender.com/update-item', formData);
     console.log(res.data);
     console.log(formData);
     if (res.data) {
