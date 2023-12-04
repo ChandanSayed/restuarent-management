@@ -12,6 +12,7 @@ import AppContext from './context/AppContext.jsx';
 import AddItem from './components/AddItem.jsx';
 import ItemDetails from './components/ItemDetails.jsx';
 import ItemUpdate from './components/ItemUpdate.jsx';
+import { Items } from './components/Items.jsx';
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,14 @@ const router = createBrowserRouter([
       {
         path: '/login',
         element: <Login />
+      },
+      {
+        path: '/items',
+        element: (
+          <PrivateRoute>
+            <Items />
+          </PrivateRoute>
+        )
       },
       {
         path: '/add-product',

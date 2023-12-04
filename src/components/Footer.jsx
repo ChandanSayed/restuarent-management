@@ -26,6 +26,11 @@ const Footer = () => {
           </a>
         </div>
       </nav>
+      <div>
+        <p>Address:</p>
+        <address>Banani, Dhaka</address>
+        <p className="text-center text-white">Copyright @ MM Restaurant</p>
+      </div>
     </footer>
   );
 };
