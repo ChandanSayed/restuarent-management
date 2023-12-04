@@ -21,7 +21,7 @@ const AddItem = () => {
     addedById: loggedUser._id
   });
 
-  const addProductHandler = async () => {
+  const addItemHandler = async () => {
     const res = await axios.post('https://restaurant-management-server.onrender.com/add-item', formData);
     console.log(res);
     if (res.data.acknowledged) {
@@ -49,7 +49,7 @@ const AddItem = () => {
     <div className="bg-base-200 py-20">
       <div className="shadow-2xl max-w-2xl bg-white mx-auto px-4 py-10 rounded-lg">
         <h2 className="text-2xl lg:text-4xl font-bold mb-6 text-center">Add Item</h2>
-        <ItemForm productHandler={addProductHandler} formData={formData} setFormData={setFormData} btnText={'Add Product'} />
+        <ItemForm itemHandler={addItemHandler} formData={formData} setFormData={setFormData} btnText={'Add Product'} />
       </div>
     </div>
   );

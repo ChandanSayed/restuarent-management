@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const ItemForm = ({ productHandler, formData, setFormData, btnText }) => {
+const ItemForm = ({ itemHandler, formData, setFormData, btnText }) => {
   const [errors, setErrors] = useState({});
 
   const handleChange = e => {
@@ -40,7 +40,7 @@ const ItemForm = ({ productHandler, formData, setFormData, btnText }) => {
       setErrors(formErrors);
     } else {
       console.log('Form submitted:', formData);
-      productHandler();
+      itemHandler();
     }
   };
 

@@ -28,7 +28,7 @@ const MyProductList = () => {
       {items.length > 0 ? (
         <div className="max-w-[1440px] px-4 mx-auto py-12 flex flex-wrap gap-6 justify-center">
           {items.map(item => (
-            <ItemCard key={product._id} item={item} />
+            <ItemCard key={item._id} item={item} />
           ))}
         </div>
       ) : (
