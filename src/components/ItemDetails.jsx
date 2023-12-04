@@ -1,12 +1,12 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { Context } from '../context/AppContext';
 import Swal from 'sweetalert2';
 
 const ItemDetails = () => {
-  const { loading, setLoading, uId } = useContext(Context);
-  const [itemDetails, setItemDetails] = useState({});
+  const { loading, setLoading, uId, itemDetails, setItemDetails } = useContext(Context);
+
   const { id } = useParams();
   useEffect(() => {
     getItemDetails();
@@ -50,9 +50,9 @@ const ItemDetails = () => {
 
         <p className="text-base text-[#0b0b0b] text-opacity-70 my-5">{itemDetails.shortDescription}</p>
         <p className={`inline-flex text-lg rounded-[4px] py-2 w-fit text-black my-2`}>Price: ${itemDetails.price}</p>
-        <button onClick={handleAddToOrder} className="btn btn-primary text-white block">
+        <Link to={'/order-food'} className="btn btn-primary text-white block max-w-[160px] pt-4">
           Order Now
-        </button>
+        </Link>
       </div>
     </div>
   );

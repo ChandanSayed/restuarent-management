@@ -10,7 +10,7 @@ const Banner = () => {
           <h1 className="mb-5 text-5xl font-bold">Welcome</h1>
           <p className="mb-5">We provide the possible best foot here.</p>
           <Link to={'/items'}>
-            <button className="btn btn-primary">See More</button>
+            <button className="btn btn-secondary">See More</button>
           </Link>
         </div>
       </div>

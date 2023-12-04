@@ -62,7 +62,7 @@ const Header = () => {
       <div className={`navbar ${dark ? 'bg-black' : 'bg-base-100'}`}>
         <div className="flex-1">
           <Link to={'/'} className="text-4xl font-bold text-red-600">
-            M<span className="text-yellow-500">M</span> <span className={`${dark ? 'text-white ' : 'text-black '}text-xl lg:text-2xl max-lg:hidden`}>MM Store</span>
+            M<span className="text-yellow-500">M</span> <span className={`${dark ? 'text-white ' : 'text-black '}text-xl lg:text-2xl max-lg:hidden`}>MM Restaurant</span>
           </Link>
         </div>
         <div className="navbar-start">

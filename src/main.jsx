@@ -16,6 +16,7 @@ import Items from './components/Items.jsx';
 import Profile from './components/Profile.jsx';
 import Blog from './components/Blog.jsx';
 import MyProductList from './components/MyProductList.jsx';
+import OrderFood from './components/OrderFood.jsx';
 
 const router = createBrowserRouter([
   {
@@ -93,6 +94,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <Blog />
+          </PrivateRoute>
+        )
+      },
+      {
+        path: '/order-food',
+        element: (
+          <PrivateRoute>
+            <OrderFood />
           </PrivateRoute>
         )
       }
