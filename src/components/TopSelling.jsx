@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Loader from './Loader';
 import axios from 'axios';
 import TopSectionCard from './TopSectionCard';
+import { Link } from 'react-router-dom';
 
 const TopSelling = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -27,6 +28,11 @@ const TopSelling = () => {
         {items.map(item => {
           return <TopSectionCard key={item._id} item={item} />;
         })}
+      </div>
+      <div className="mt-8 text-center">
+        <Link to={'/items'}>
+          <button className="btn btn-secondary">See All</button>
+        </Link>
       </div>
     </div>
   );
