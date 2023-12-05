@@ -1,8 +1,12 @@
 import React from 'react';
+import { Helmet } from 'react-helmet';
 
 const Blog = () => {
   return (
     <div className="max-w-[700px] mx-auto py-12">
+      <Helmet>
+        <title>Blog || MM Restaurant</title>
+      </Helmet>
       <div className="shadow mb-8 p-4 rounded">
         <h2 className="capitalize text-2xl lg:text-4xl mb-4 font-bold">what is one way data binding?</h2>
         <p>In this case, changes in the data automatically update the UI, but changes in the UI do not automatically update the data. That's why it is referred to as one-way data binding. React achieves one-way data binding by using state and props.</p>

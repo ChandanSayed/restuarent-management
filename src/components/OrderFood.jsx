@@ -3,6 +3,7 @@ import { Context } from '../context/AppContext';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 import { Navigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 const OrderFood = () => {
   const { loggedUser, itemDetails } = useContext(Context);
@@ -73,6 +74,9 @@ const OrderFood = () => {
 
   return (
     <div className="bg-base-200 py-20">
+      <Helmet>
+        <title>Orders || MM Restaurant</title>
+      </Helmet>
       <div className="shadow-2xl max-w-2xl bg-white mx-auto px-4 py-10 rounded-lg">
         <h2 className="text-2xl lg:text-4xl font-bold mb-6 text-center">Order Item</h2>
         <form onSubmit={handleSubmit} className="w-full max-w-lg mx-auto">

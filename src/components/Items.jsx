@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ItemCard from './ItemCard';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import { Helmet } from 'react-helmet';
 
 const Items = () => {
   const { id } = useParams();
@@ -34,6 +35,9 @@ const Items = () => {
 
   return (
     <div className="bg-base-200">
+      <Helmet>
+        <title>All items || MM Restaurant</title>
+      </Helmet>
       <div className="max-w-[1440px] px-4 mx-auto pt-12">
         <form action="/" onSubmit={handleForm} className="text-center">
           <input onChange={handleSearch} type="text" placeholder="Search Item" className="input input-bordered input-success w-full max-w-xs" />

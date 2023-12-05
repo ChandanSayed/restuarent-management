@@ -1,10 +1,14 @@
 import React, { useContext } from 'react';
 import { Context } from '../context/AppContext';
+import { Helmet } from 'react-helmet';
 
 const Profile = () => {
   const { loggedUser } = useContext(Context);
   return (
     <div className="max-w-lg mx-auto shadow-lg my-16 p-5 rounded-lg">
+      <Helmet>
+        <title>Profile || MM Restaurant</title>
+      </Helmet>
       <h2 className="my-5 text-xl lg:text-4xl text-center">Profile Details</h2>
       <div className="flex items-center gap-3">
         <div>Username:</div>
