@@ -10,16 +10,30 @@ const Items = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [items, setItems] = useState([]);
   const [constantItems, setConstantItems] = useState([]);
+  const [firstDisabled, setFirstDisabled] = useState(true);
+  const [LastDisabled, setLastDisabled] = useState(false);
+  const [itemPerPage, setItemPerPage] = useState(9);
+  const [pageNumber, setPageNumber] = useState(0);
+
   useEffect(() => {
     getItems();
   }, []);
 
+  useEffect(() => {
+    getItems();
+  }, [pageNumber]);
+
   async function getItems() {
-    const res = await axios.get(`https://restaurant-management-server.onrender.com/items/`);
+    const res = await axios.get(`http://localhost:5500/items?itemPerPage=${itemPerPage}&pageNumber=${pageNumber}`);
     console.log(res.data);
     setItems(res.data);
     setConstantItems(res.data);
     setIsLoading(false);
+    if (res.data.length < 9) {
+      setLastDisabled(true);
+    } else {
+      setLastDisabled(false);
+    }
   }
 
   function handleForm(e) {
@@ -39,6 +53,22 @@ const Items = () => {
   if (isLoading) {
     return <Loader />;
   }
+
+  function handlePrev() {
+    if (pageNumber <= 1) {
+      setFirstDisabled(true);
+      setPageNumber(0);
+      return;
+    }
+    setPageNumber(prev => prev - 1);
+  }
+
+  function handleNext() {
+    setFirstDisabled(false);
+    setPageNumber(prev => prev + 1);
+  }
+
+  console.log(pageNumber);
 
   return (
     <div className="bg-base-200">
@@ -65,6 +95,16 @@ const Items = () => {
           </div>
         </div>
       )}
+      <div className="py-12 max-w-[300px] mx-auto">
+        <div className="join grid grid-cols-2">
+          <button className="join-item btn btn-outline" disabled={firstDisabled} onClick={handlePrev}>
+            Previous page
+          </button>
+          <button className="join-item btn btn-outline" disabled={LastDisabled} onClick={handleNext}>
+            Next
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
