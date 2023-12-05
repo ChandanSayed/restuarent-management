@@ -24,7 +24,7 @@ const Items = () => {
   }, [pageNumber]);
 
   async function getItems() {
-    const res = await axios.get(`http://localhost:5500/items?itemPerPage=${itemPerPage}&pageNumber=${pageNumber}`);
+    const res = await axios.get(`https://restaurant-management-server.onrender.com/items?itemPerPage=${itemPerPage}&pageNumber=${pageNumber}`);
     console.log(res.data);
     setItems(res.data);
     setConstantItems(res.data);
