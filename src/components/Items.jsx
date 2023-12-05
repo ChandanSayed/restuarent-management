@@ -3,9 +3,11 @@ import ItemCard from './ItemCard';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { Helmet } from 'react-helmet';
+import Loader from './Loader';
 
 const Items = () => {
   const { id } = useParams();
+  const [isLoading, setIsLoading] = useState(true);
   const [items, setItems] = useState([]);
   const [constantItems, setConstantItems] = useState([]);
   useEffect(() => {
@@ -17,6 +19,7 @@ const Items = () => {
     console.log(res.data);
     setItems(res.data);
     setConstantItems(res.data);
+    setIsLoading(false);
   }
 
   function handleForm(e) {
@@ -31,6 +34,10 @@ const Items = () => {
     const list = items.filter(item => item.id);
     console.log(list);
     // setItems(items.filter(item => item.name.toLowerCase() != e.target.value.toLowerCase()));
+  }
+
+  if (isLoading) {
+    return <Loader />;
   }
 
   return (
