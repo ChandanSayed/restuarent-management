@@ -27,13 +27,13 @@ const Items = () => {
   }
 
   function handleSearch(e) {
-    console.log(e.target.value);
+    const searchText = e.target.value.toLowerCase();
     if (e.target.value === '') {
       return setItems(constantItems);
+    } else {
+      const filteredList = constantItems.filter(item => item.name.toLowerCase().includes(searchText));
+      setItems(filteredList);
     }
-    const list = items.filter(item => item.id);
-    console.log(list);
-    // setItems(items.filter(item => item.name.toLowerCase() != e.target.value.toLowerCase()));
   }
 
   if (isLoading) {
@@ -51,7 +51,7 @@ const Items = () => {
           {/* <input type="button" value={'Search'} /> */}
         </form>
       </div>
-      {items.length > 0 ? (
+      {constantItems.length > 0 ? (
         <div className="max-w-[1440px] px-4 mx-auto py-12 flex flex-wrap gap-6 justify-center">
           {items.map(item => (
             <ItemCard key={item._id} item={item} />
