@@ -6,18 +6,40 @@ import axios from 'axios';
 const Items = () => {
   const { id } = useParams();
   const [items, setItems] = useState([]);
+  const [constantItems, setConstantItems] = useState([]);
   useEffect(() => {
     getItems();
   }, []);
 
   async function getItems() {
-    const res = await axios.get(`http://localhost:5500/items/`);
+    const res = await axios.get(`https://restaurant-management-server.onrender.com/items/`);
     console.log(res.data);
     setItems(res.data);
+    setConstantItems(res.data);
+  }
+
+  function handleForm(e) {
+    e.preventDefault();
+  }
+
+  function handleSearch(e) {
+    console.log(e.target.value);
+    if (e.target.value === '') {
+      return setItems(constantItems);
+    }
+    const list = items.filter(item => item.id);
+    console.log(list);
+    // setItems(items.filter(item => item.name.toLowerCase() != e.target.value.toLowerCase()));
   }
 
   return (
     <div className="bg-base-200">
+      <div className="max-w-[1440px] px-4 mx-auto pt-12">
+        <form action="/" onSubmit={handleForm} className="text-center">
+          <input onChange={handleSearch} type="text" placeholder="Search Item" className="input input-bordered input-success w-full max-w-xs" />
+          {/* <input type="button" value={'Search'} /> */}
+        </form>
+      </div>
       {items.length > 0 ? (
         <div className="max-w-[1440px] px-4 mx-auto py-12 flex flex-wrap gap-6 justify-center">
           {items.map(item => (
