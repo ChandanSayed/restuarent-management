@@ -28,9 +28,9 @@ const RegisterForm = () => {
       .then(userCredential => {
         // Signed up
         const user = userCredential.user;
-        console.log(user);
         setSuccess('User registration successful!');
         // localStorage.setItem('loggedUser', JSON.stringify({ name, email, profilePicture }));
+        console.log(user);
         updateProfile(user, {
           displayName: name,
           photoURL: profilePicture
@@ -38,13 +38,11 @@ const RegisterForm = () => {
           .then(async () => {
             console.log('Profile updated!');
             const res = await Axios.post('https://restaurant-management-server.onrender.com/register', { name, email, profilePicture });
-            // console.log(res.data);
-
             if (res.data.insertedId) {
               // localStorage.setItem('loggedUser', JSON.stringify(res.data));
               // const stateValue = { res.data.insertedId ,name, email, profilePicture }
               console.log(res.data.insertedId, name, email, profilePicture);
-              await AppDispatch({ type: 'login', value: { _id: res.data.insertedId, name, email, profilePicture } });
+              AppDispatch({ type: 'login', value: { _id: res.data.insertedId, name, email, profilePicture }, uId: user.uid });
             }
           })
           .catch(error => {

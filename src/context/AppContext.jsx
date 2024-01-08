@@ -28,6 +28,7 @@ export default function AppContext({ children }) {
         draft.userPhoto = action.value.photoURL;
         draft.loading = false;
         draft.logged = true;
+        draft.loggedUser = {};
         break;
       case 'logout':
         draft.logged = false;
@@ -35,7 +36,6 @@ export default function AppContext({ children }) {
         draft.loggedUser = {};
         break;
       case 'login':
-        console.log(action.value);
         draft.loggedUser = action.value;
         draft.logged = true;
         break;
@@ -52,7 +52,7 @@ export default function AppContext({ children }) {
     } else {
       localStorage.removeItem('loggedUser');
     }
-  }, [state.logged]);
+  }, [state.logged, state.loggedUser]);
 
   const auth = getAuth(app);
   // useEffect(() => {
@@ -98,8 +98,6 @@ export default function AppContext({ children }) {
       dispatch({ type: 'login', value: res.data });
     }
   }
-
-  // console.log(state);
 
   return (
     <StateContext.Provider value={state}>
