@@ -13,7 +13,6 @@ const TopSelling = () => {
 
   async function getItems() {
     const res = await axios.get(`https://restaurant-management-server.onrender.com/top-items/`);
-    console.log(res.data);
     setItems(res.data);
     setIsLoading(false);
   }

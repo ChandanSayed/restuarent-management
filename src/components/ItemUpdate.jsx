@@ -2,13 +2,13 @@ import React, { useContext, useEffect, useState } from 'react';
 import ItemForm from './ItemForm';
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import { Context } from '../context/AppContext';
 import Loader from './Loader';
 import { useParams } from 'react-router-dom';
+import StateContext from '../context/StateContext';
 
 const ItemUpdate = () => {
   const { id } = useParams();
-  const { loggedUser } = useContext(Context);
+  const { loggedUser } = useContext(StateContext);
   console.log(loggedUser.email);
   const [formData, setFormData] = useState({
     image: '',

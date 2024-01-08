@@ -3,11 +3,11 @@ import { GoogleAuthProvider, getAuth, signInWithPopup, signOut } from 'firebase/
 import app from '../firebase/firebase.init';
 import LoginForm from './LoginForm';
 import RegisterForm from './RegisterForm';
-import { Context } from '../context/AppContext';
 import { Navigate } from 'react-router-dom';
+import StateContext from '../context/StateContext';
 
 const Login = () => {
-  const { user, userPhoto } = useContext(Context);
+  const { user, userPhoto } = useContext(StateContext);
 
   const auth = getAuth(app);
   const provider = new GoogleAuthProvider();

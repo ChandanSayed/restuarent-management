@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
-import { Context } from '../context/AppContext';
 import { Navigate } from 'react-router-dom';
 import Loader from './Loader';
+import StateContext from '../context/StateContext';
 
 const PrivateRoute = ({ children }) => {
-  const { user, loading } = useContext(Context);
+  const { user, loading } = useContext(StateContext);
 
   if (loading) {
     return <Loader />;

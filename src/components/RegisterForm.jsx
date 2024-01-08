@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { getAuth, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import app from '../firebase/firebase.init';
 import Axios from 'axios';
+import DispatchContext from '../context/DispatchContext';
 
 const RegisterForm = () => {
+  const AppDispatch = useContext(DispatchContext);
   const [name, setName] = useState('');
   const [profilePicture, setProfilePicture] = useState('');
   const [email, setEmail] = useState('');
@@ -28,7 +30,7 @@ const RegisterForm = () => {
         const user = userCredential.user;
         console.log(user);
         setSuccess('User registration successful!');
-        localStorage.setItem('loggedUser', JSON.stringify({ name, email, profilePicture }));
+        // localStorage.setItem('loggedUser', JSON.stringify({ name, email, profilePicture }));
         updateProfile(user, {
           displayName: name,
           photoURL: profilePicture
@@ -38,7 +40,8 @@ const RegisterForm = () => {
             const res = await Axios.post('https://restaurant-management-server.onrender.com/register', { name, email, profilePicture });
             console.log(res.data);
             if (res.data.acknowledge) {
-              localStorage.setItem('loggedUser', JSON.stringify(res.data));
+              // localStorage.setItem('loggedUser', JSON.stringify(res.data));
+              // AppDispatch({ type: 'login', value: res.data });
             }
           })
           .catch(error => {

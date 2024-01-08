@@ -1,11 +1,15 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { Context } from '../context/AppContext';
 import Swal from 'sweetalert2';
+import StateContext from '../context/StateContext';
+import DispatchContext from '../context/DispatchContext';
 
 const ItemDetails = () => {
-  const { loading, setLoading, uId, itemDetails, setItemDetails } = useContext(Context);
+  const { loading, uId } = useContext(StateContext);
+  const [itemDetails, setItemDetails] = useState({});
+
+  const AppDispatch = useContext(DispatchContext);
 
   const { id } = useParams();
   useEffect(() => {
@@ -14,8 +18,7 @@ const ItemDetails = () => {
   async function getItemDetails() {
     const res = await axios.get(`https://restaurant-management-server.onrender.com/items/item-details/${id}`);
     setItemDetails(res.data);
-    setLoading(false);
-    console.log(res.data);
+    AppDispatch({ type: 'get-item-details', value: res.data });
   }
 
   if (loading) {

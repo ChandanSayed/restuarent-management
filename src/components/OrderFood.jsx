@@ -1,12 +1,12 @@
 import React, { useContext, useState } from 'react';
-import { Context } from '../context/AppContext';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 import { Navigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import StateContext from '../context/StateContext';
 
 const OrderFood = () => {
-  const { loggedUser, itemDetails } = useContext(Context);
+  const { loggedUser, itemDetails } = useContext(StateContext);
   console.log(loggedUser);
 
   const [errors, setErrors] = useState({});

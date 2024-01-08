@@ -2,19 +2,20 @@ import React, { useContext } from 'react';
 import { Link, NavLink, Navigate } from 'react-router-dom';
 import { getAuth, signOut } from 'firebase/auth';
 import app from '../firebase/firebase.init';
-import { Context } from '../context/AppContext';
 import Loader from './Loader';
+import StateContext from '../context/StateContext';
+import DispatchContext from '../context/DispatchContext';
 
 const Header = () => {
-  const { user, userPhoto, setUser, loggedUser, loading } = useContext(Context);
+  const { user, userPhoto, loggedUser, loading } = useContext(StateContext);
+  const AppDispatch = useContext(DispatchContext);
   const auth = getAuth(app);
   const dark = true;
-  console.log(loggedUser);
+
   function handleLogout() {
     signOut(auth)
       .then(() => {
-        setUser('');
-        localStorage.removeItem('loggedUser');
+        AppDispatch({ type: 'logout' });
         return <Navigate to={'/'} />;
       })
       .catch(error => {

@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
-import { Context } from '../context/AppContext';
 import { Helmet } from 'react-helmet-async';
+import StateContext from '../context/StateContext';
 
 const Profile = () => {
-  const { loggedUser } = useContext(Context);
+  const { loggedUser } = useContext(StateContext);
   return (
     <div className="max-w-lg mx-auto shadow-lg my-16 p-5 rounded-lg">
       <Helmet>

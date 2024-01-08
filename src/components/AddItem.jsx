@@ -2,12 +2,11 @@ import React, { useContext, useState } from 'react';
 import ItemForm from './ItemForm';
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import { Context } from '../context/AppContext';
-import { Helmet } from 'react-helmet';
+import StateContext from '../context/StateContext';
+import { Helmet } from 'react-helmet-async';
 
 const AddItem = () => {
-  const { loggedUser } = useContext(Context);
-  console.log(loggedUser.email);
+  const { loggedUser } = useContext(StateContext);
   const [formData, setFormData] = useState({
     image: '',
     name: '',
@@ -24,7 +23,7 @@ const AddItem = () => {
 
   const addItemHandler = async () => {
     const res = await axios.post('https://restaurant-management-server.onrender.com/add-item', formData);
-    console.log(res);
+
     if (res.data.acknowledged) {
       Swal.fire({
         title: 'Congrats!',

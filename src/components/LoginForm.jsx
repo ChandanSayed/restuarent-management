@@ -2,19 +2,20 @@ import { FcGoogle } from 'react-icons/fc';
 import app from '../firebase/firebase.init';
 import { useContext, useState } from 'react';
 import { GoogleAuthProvider, getAuth, signInWithEmailAndPassword, signInWithPopup, signOut } from 'firebase/auth';
-import { Context } from '../context/AppContext';
+
 import Axios from 'axios';
 import { Navigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import DispatchContext from '../context/DispatchContext';
 
 const LoginForm = () => {
+  const AppDispatch = useContext(DispatchContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const auth = getAuth(app);
   const provider = new GoogleAuthProvider();
-  const { setUser, setUserPhoto, setLoggedUser, setReload } = useContext(Context);
 
   function handleGoogleSignIn() {
     signInWithPopup(auth, provider)
@@ -30,14 +31,13 @@ const LoginForm = () => {
         const res = await Axios.post('https://restaurant-management-server.onrender.com/login', { email: user.email });
         console.log(res.data);
         if (res.data._id) {
-          localStorage.setItem('loggedUser', JSON.stringify(res.data));
-          setReload(prev => prev + 1);
+          // localStorage.setItem('loggedUser', JSON.stringify(res.data));
+          AppDispatch({ type: 'login', value: res.data });
         } else {
           const res = await Axios.post('https://restaurant-management-server.onrender.com/register', { name: user.displayName, email: user.email, profilePicture: user.photoURL });
-          console.log(res.data);
           if (res.data.insertedId) {
-            localStorage.setItem('loggedUser', JSON.stringify({ id: res.data.insertedId, name: user.displayName, email: user.email, profilePicture: user.photoURL }));
-            setReload(prev => prev + 1);
+            // localStorage.setItem('loggedUser', JSON.stringify({ id: res.data.insertedId, name: user.displayName, email: user.email, profilePicture: user.photoURL }));
+            AppDispatch({ type: 'login', value: { id: res.data.insertedId, name: user.displayName, email: user.email, profilePicture: user.photoURL } });
           }
         }
       })
@@ -46,7 +46,8 @@ const LoginForm = () => {
         const errorCode = error.code;
         const errorMessage = error.message;
         // The email of the user's account used.
-        const email = error.customData.email;
+        // const email = error.customData.email;
+        console.log(error);
         // The AuthCredential type that was used.
         const credential = GoogleAuthProvider.credentialFromError(error);
         // ...
@@ -64,15 +65,13 @@ const LoginForm = () => {
         console.log(user);
         setSuccess('Login successful!');
         const res = await Axios.post('https://restaurant-management-server.onrender.com/login', { email });
-        localStorage.setItem('loggedUser', JSON.stringify(res.data));
-        setReload(prev => prev + 1);
+        // localStorage.setItem('loggedUser', JSON.stringify(res.data));
         console.log(res.data._id);
         if (!res.data) {
           function handleLogout() {
             signOut(auth)
               .then(() => {
-                localStorage.removeItem('loggedUser');
-                setUser('');
+                AppDispatch({ type: 'logout' });
                 Swal.fire({
                   icon: 'error',
                   title: 'Oops...',
@@ -86,9 +85,9 @@ const LoginForm = () => {
           }
           return handleLogout();
         }
-        setLoggedUser(res.data);
-        setUser(user.displayName);
-        setUserPhoto(user.photoURL);
+        AppDispatch({ type: 'login', value: res.data });
+        // setUser(user.displayName);
+        // setUserPhoto(user.photoURL);
       })
       .catch(error => {
         const errorCode = error.code;
