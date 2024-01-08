@@ -3,7 +3,8 @@ import Banner from './Banner';
 import TopSelling from './TopSelling';
 import Testimonial from './Testimonial';
 import NewsLetter from './NewsLetter';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
+// import { Helmet } from 'react-helmet';
 
 const Home = () => {
   return (
@@ -13,8 +14,8 @@ const Home = () => {
       </Helmet>
       <Banner />
       <TopSelling />
-      <Testimonial />
-      <NewsLetter />
+      {/* <Testimonial /> */}
+      {/* <NewsLetter /> */}
     </>
   );
 };

@@ -5,7 +5,7 @@ const ItemCard = ({ item }) => {
   const { addedByEmail, addedById, addedByName, category, image, name, orderCount, origin, price, quantity, shortDescription, _id } = item;
 
   return (
-    <div className="max-w-sm rounded overflow-hidden shadow-2xl bg-white pt-5 flex flex-col justify-between">
+    <div data-aos="fade-up" className="max-w-sm rounded overflow-hidden shadow-2xl bg-white pt-5 flex flex-col justify-between">
       <img src={image} alt={name} className="w-full h-64 object-contain" />
       <div className="px-6 py-4 flex flex-col justify-between">
         <div className="flex justify-between items-center">

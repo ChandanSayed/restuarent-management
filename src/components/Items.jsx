@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import ItemCard from './ItemCard';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import { Helmet } from 'react-helmet';
 import Loader from './Loader';
+import { Helmet } from 'react-helmet-async';
 
 const Items = () => {
   const { id } = useParams();

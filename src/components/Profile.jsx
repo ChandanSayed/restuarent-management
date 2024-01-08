@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Context } from '../context/AppContext';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 
 const Profile = () => {
   const { loggedUser } = useContext(Context);

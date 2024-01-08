@@ -23,7 +23,9 @@ const TopSelling = () => {
   }
   return (
     <div className="bg-base-200 py-12">
-      <h2 className="text-xl lg:text-3xl font-bold text-center px-4 mb-8">Top Selling</h2>
+      <h2 data-aos="fade-up" className="text-xl lg:text-3xl font-bold text-center px-4 mb-8">
+        Top Selling
+      </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 gap-y-10 max-w-[1440px] px-4 mx-auto">
         {items.map(item => {
           return <TopSectionCard key={item._id} item={item} />;

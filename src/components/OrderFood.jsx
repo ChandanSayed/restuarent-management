@@ -3,7 +3,7 @@ import { Context } from '../context/AppContext';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 import { Navigate } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 
 const OrderFood = () => {
   const { loggedUser, itemDetails } = useContext(Context);
