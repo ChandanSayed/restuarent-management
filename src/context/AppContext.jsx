@@ -32,8 +32,10 @@ export default function AppContext({ children }) {
       case 'logout':
         draft.logged = false;
         draft.user = '';
+        draft.loggedUser = {};
         break;
       case 'login':
+        console.log(action.value);
         draft.loggedUser = action.value;
         draft.logged = true;
         break;
@@ -45,7 +47,7 @@ export default function AppContext({ children }) {
   const [state, dispatch] = useImmerReducer(AppReducer, initialState);
 
   useEffect(() => {
-    if (state.logged) {
+    if (state.logged && state.loggedUser) {
       localStorage.setItem('loggedUser', JSON.stringify(state.loggedUser));
     } else {
       localStorage.removeItem('loggedUser');

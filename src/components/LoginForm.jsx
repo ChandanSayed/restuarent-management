@@ -27,10 +27,11 @@ const LoginForm = () => {
         const user = result.user;
         // IdP data available using getAdditionalUserInfo(result)
         // ...
-        console.log(user);
+        // console.log(user);
         const res = await Axios.post('https://restaurant-management-server.onrender.com/login', { email: user.email });
-        console.log(res.data);
+
         if (res.data._id) {
+          console.log(res.data);
           // localStorage.setItem('loggedUser', JSON.stringify(res.data));
           AppDispatch({ type: 'login', value: res.data });
         } else {

@@ -38,10 +38,13 @@ const RegisterForm = () => {
           .then(async () => {
             console.log('Profile updated!');
             const res = await Axios.post('https://restaurant-management-server.onrender.com/register', { name, email, profilePicture });
-            console.log(res.data);
-            if (res.data.acknowledge) {
+            // console.log(res.data);
+
+            if (res.data.insertedId) {
               // localStorage.setItem('loggedUser', JSON.stringify(res.data));
-              // AppDispatch({ type: 'login', value: res.data });
+              // const stateValue = { res.data.insertedId ,name, email, profilePicture }
+              console.log(res.data.insertedId, name, email, profilePicture);
+              await AppDispatch({ type: 'login', value: { _id: res.data.insertedId, name, email, profilePicture } });
             }
           })
           .catch(error => {
